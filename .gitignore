@@ -6,3 +6,15 @@ settings.cfg
 
 # mac files
 .DS_Store
+
+# jetbrains
+.idea/
+
+# python
+*.pc
+*.pyc
+*.pyo
+__pycache__
+.adoc
+.deps
+.dvi-dep

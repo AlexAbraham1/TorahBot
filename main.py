@@ -3,7 +3,6 @@ from torahbot.lib.telegram import TelegramClient
 
 from tinydb import TinyDB, Query
 from datetime import datetime as dt
-from concurrent.futures import ThreadPoolExecutor, wait
 from time import sleep
 import random
 import logging
@@ -31,10 +30,6 @@ class TorahBot:
         self.message_template_new_shiur = config["MAIN"]["MESSAGE_TEMPLATE_NEW_SHIUR"]
         self.yutorah_min_sleep = int(config["MAIN"]["YUTORAH_MIN_SLEEP"])
         self.yutorah_max_sleep = int(config["MAIN"]["YUTORAH_MAX_SLEEP"])
-
-    def start_telegram_bot(self):
-        self.logger.info("starting telegram bot")
-        self.telegram_client.startup()
 
     def run_shiur_retrieval(self, teacher_id):
         Q = Query()
@@ -78,17 +73,10 @@ class TorahBot:
             sleep(sleep_time)
 
     def run(self):
-        pool = ThreadPoolExecutor(2)
-        futures = []
-
-        futures.append(pool.submit(self.start_telegram_bot))
-
-        self.logger.info("sleeping 10 seconds before starting shiur retrieval")
-        sleep(10)
-
-        futures.append(pool.submit(self.start_shiur_retrieval))
-
-        wait(futures)
+        try:
+            self.start_shiur_retrieval()
+        except KeyboardInterrupt as ki:
+            logging.info("Good Bye!")
 
 
 if __name__ == "__main__":

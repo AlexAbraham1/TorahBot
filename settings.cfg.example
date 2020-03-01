@@ -1,9 +1,6 @@
 [MAIN]
-#TinyDB File Location
-DB_FILE_LOCATION = data/db.json
-
 #Chat ID for sending Telegram messages
-TELEGRAM_CHAT_ID = <TELEGRAM_CHANNEL_ID>
+TELEGRAM_CHAT_ID = <TELEGRAM_CHAT_ID>
 
 #Message template when new shiur gets pulled from YU Torah
 MESSAGE_TEMPLATE_NEW_SHIUR = New Shiur!
@@ -23,7 +20,11 @@ YUTORAH_MAX_SLEEP = 120
 
 [TELEGRAM_CLIENT]
 #Telegram API Token
-API_TOKEN = <TELEGRAM_BOT_API_TOKEN>
+API_TOKEN = <TELEGRAM_API_TOKEN>
 
 [YUTORAH_CLIENT]
-SHIUR_LOOKUP_URL_TEMPLATE=https://www.yutorah.org/search/_get_search_results.cfm?sort_by=shiurdate+desc&page={}&facet_query=teacherid:{}
+SHIUR_LOOKUP_URL_TEMPLATE = https://www.yutorah.org/search/_get_search_results.cfm?sort_by=shiurdate+desc&page={}&facet_query=teacherid:{}
+
+[FIRESTORE]
+FIRESTORE_PROJECT_ID = <GOOGLE_CLOUD_PROJECT_ID>
+FIRESTORE_SHIURIM_COLLECTION = shiurim_db

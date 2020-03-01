@@ -3,7 +3,7 @@
 DB_FILE_LOCATION = data/db.json
 
 #Chat ID for sending Telegram messages
-TELEGRAM_CHAT_ID = 774700232
+TELEGRAM_CHAT_ID = <TELEGRAM_CHANNEL_ID>
 
 #Message template when new shiur gets pulled from YU Torah
 MESSAGE_TEMPLATE_NEW_SHIUR = New Shiur!

@@ -1,0 +1,29 @@
+[MAIN]
+#TinyDB File Location
+DB_FILE_LOCATION = data/db.json
+
+#Chat ID for sending Telegram messages
+TELEGRAM_CHAT_ID = 774700232
+
+#Message template when new shiur gets pulled from YU Torah
+MESSAGE_TEMPLATE_NEW_SHIUR = New Shiur!
+    Teacher: *{teacher}*
+    Title: *{title}*
+    Date: *{date}*
+
+#Teacher IDs for YU Torah.
+#80330 = Rav Schnall
+#81690 = Rav Siev
+YUTORAH_TEACHER_IDS = 80330,81690
+
+#Min and max sleep time between YUTorah requests (randomized)
+YUTORAH_MIN_SLEEP = 60
+YUTORAH_MAX_SLEEP = 120
+
+
+[TELEGRAM_CLIENT]
+#Telegram API Token
+API_TOKEN = <TELEGRAM_BOT_API_TOKEN>
+
+[YUTORAH_CLIENT]
+SHIUR_LOOKUP_URL_TEMPLATE=https://www.yutorah.org/search/_get_search_results.cfm?sort_by=shiurdate+desc&page={}&facet_query=teacherid:{}

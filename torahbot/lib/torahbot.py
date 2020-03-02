@@ -15,7 +15,7 @@ class TorahBot:
     def __init__(self):
         logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                             level=logging.INFO)
-        self.logger = logging.getLogger("Main")
+        self.logger = logging.getLogger("TorahBot")
 
         config = ConfigParser()
         config.read("settings.cfg")

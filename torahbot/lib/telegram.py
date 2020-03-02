@@ -18,6 +18,7 @@ class TelegramClient:
 
 
     def send_text(self, chat_id: int, text: str) -> None:
+        self.logger.info("sending text to channel")
         self._updater.bot.send_message(
             chat_id=chat_id,
             text=text,
@@ -25,6 +26,7 @@ class TelegramClient:
         )
 
     def send_audio(self, chat_id: int, audio: BytesIO) -> None:
+        self.logger.info("sending audio to channel")
         self._updater.bot.send_audio(
             chat_id=chat_id,
             audio=audio

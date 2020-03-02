@@ -3,17 +3,25 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from configparser import SectionProxy
 from google.cloud.firestore_v1.collection import CollectionReference
+import logging
 
 
 class FireStoreClient:
 
     def __init__(self, config: SectionProxy):
+        logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                            level=logging.INFO)
+        self.logger = logging.getLogger("FireStore")
+
         # Use the application default credentials
         if not len(firebase_admin._apps):
+            self.logger.info("initializing app for firebase admin")
             cred = credentials.ApplicationDefault()
             firebase_admin.initialize_app(cred, {
                 'projectId': config["FIRESTORE_PROJECT_ID"],
             })
+        else:
+            self.logger.info("firebase admin app already initialized")
 
         db = firestore.client()
         self._shiur_collection: CollectionReference = db.collection(config["FIRESTORE_SHIURIM_COLLECTION"])

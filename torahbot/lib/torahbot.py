@@ -1,6 +1,6 @@
 from torahbot.lib.yutorah import YUTorahClient
 from torahbot.lib.telegram import TelegramClient
-from torahbot.lib.firestore import FireStoreClient
+from torahbot.lib.db_helper import MongoDBHelper
 
 from datetime import datetime as dt
 from time import sleep
@@ -20,7 +20,7 @@ class TorahBot:
         config = ConfigParser()
         config.read("settings.cfg")
 
-        self.fs = FireStoreClient(config["FIRESTORE"])
+        self.mongo = MongoDBHelper(config["MONGODB"])
         self.yutorah_client = YUTorahClient(config["YUTORAH_CLIENT"])
 
         self.telegram_client = TelegramClient(config["TELEGRAM_CLIENT"])
@@ -33,7 +33,7 @@ class TorahBot:
 
     def insert_shiur_to_db(self, db_record: dict):
         self.logger.info("inserting shiur into database")
-        self.fs.insert_shiur(
+        self.mongo.insert_shiur(
             shiur_id=db_record["shiur_id"],
             teacher_id=db_record["teacher_id"],
             teacher_name=db_record["teacher_name"],
@@ -63,7 +63,7 @@ class TorahBot:
         shiurim = self.yutorah_client.get_shiurim_by_teacher(teacher_id=teacher_id)
         for shiur in shiurim:
             # since the client returns results sorted by date desc, we can break loop once we see a familiar shiur_id
-            if self.fs.shiur_exists(shiur["shiurid"]):
+            if self.mongo.shiur_exists(shiur["shiurid"]):
                 break
 
             db_record = {

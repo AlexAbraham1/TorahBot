@@ -1,0 +1,11 @@
+[Unit]
+Description=TorahBot Service
+After=multi-user.target
+
+[Service]
+Type=idle
+WorkingDirectory=/home/pi/workspace/TorahBot
+ExecStart=/home/pi/berryconda3/envs/TorahBot/bin/python /home/pi/workspace/TorahBot/main.py
+
+[Install]
+WantedBy=multi-user.target

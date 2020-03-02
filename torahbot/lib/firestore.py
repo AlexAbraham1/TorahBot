@@ -13,24 +13,25 @@ class FireStoreClient:
                             level=logging.INFO)
         self.logger = logging.getLogger("FireStore")
 
-        # Use the application default credentials
+        self._gcp_project = config["FIRESTORE_PROJECT_ID"]
+        self._shiur_collection_name = config["FIRESTORE_SHIURIM_COLLECTION"]
+
+    def _get_shiur_collection(self) -> CollectionReference:
         if not len(firebase_admin._apps):
-            self.logger.info("initializing app for firebase admin")
             cred = credentials.ApplicationDefault()
             firebase_admin.initialize_app(cred, {
-                'projectId': config["FIRESTORE_PROJECT_ID"],
+                'projectId': self._gcp_project,
             })
-        else:
-            self.logger.info("firebase admin app already initialized")
+        return firestore.client().collection(self._shiur_collection_name)
 
-        db = firestore.client()
-        self._shiur_collection: CollectionReference = db.collection(config["FIRESTORE_SHIURIM_COLLECTION"])
 
     def shiur_exists(self, shiur_id: int) -> bool:
-        return self._shiur_collection.document(str(shiur_id)).get().exists
+        collection = self._get_shiur_collection()
+        return collection.document(str(shiur_id)).get().exists
 
     def insert_shiur(self, shiur_id: int, teacher_id: int, teacher_name: str, shiur_date: str, shiur_url: str, shiur_title: str) -> None:
-        doc_ref = self._shiur_collection.document(str(shiur_id))
+        collection = self._get_shiur_collection()
+        doc_ref = collection.document(str(shiur_id))
         doc_ref.set({
             "teacher_id": teacher_id,
             "teacher_name": teacher_name,

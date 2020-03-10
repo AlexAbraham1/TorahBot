@@ -14,9 +14,6 @@ class YUTorahClient:
         self.logger = logging.getLogger("YUTorahClient")
 
         self.url_template = config["SHIUR_LOOKUP_URL_TEMPLATE"]
-        self.proxy_rotator_url = config["PROXY_ROTATOR_URL"]
-        self.yu_request_timeout = int(config["YUZMANIM_REQUEST_TIMEOUT"])
-        self.yu_request_tries = int(config["YUZMANIM_REQUEST_TRIES"])
 
     def get_shiurim_by_teacher(self, teacher_id, page=1):
         url = self.url_template.format(

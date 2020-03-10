@@ -87,6 +87,7 @@ class TorahBot:
             for teacher_id in self.teacher_ids:
                 self.run_shiur_retrieval(teacher_id)
             sleep_time = random.randint(self.yutorah_min_sleep, self.yutorah_max_sleep)
+            self.logger.info("sleeping for {} seconds".format(sleep_time))
             sleep(sleep_time)
 
     def run(self):

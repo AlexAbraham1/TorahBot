@@ -25,5 +25,4 @@ class YUTorahClient:
             url=url
         )
         data = json.loads(response.text)
-        self.logger.info("shiur data: {}".format(response.text))
         return data["response"]["docs"]

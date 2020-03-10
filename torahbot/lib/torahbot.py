@@ -66,7 +66,7 @@ class TorahBot:
         for shiur in shiurim:
             # since the client returns results sorted by date desc, we can break loop once we see a familiar shiur_id
             if self.mongo.shiur_exists(shiur["shiurid"]):
-                break
+                continue
 
             db_record = {
                 "shiur_id": shiur["shiurid"],

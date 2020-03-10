@@ -15,8 +15,8 @@ MESSAGE_TEMPLATE_NEW_SHIUR = New Shiur!
 YUTORAH_TEACHER_IDS = 80330,81690
 
 #Min and max sleep time between YUTorah requests (randomized)
-YUTORAH_MIN_SLEEP = 60
-YUTORAH_MAX_SLEEP = 120
+YUTORAH_MIN_SLEEP = 3600
+YUTORAH_MAX_SLEEP = 4500
 
 
 [TELEGRAM_CLIENT]
@@ -25,10 +25,6 @@ API_TOKEN = <TELEGRAM_API_TOKEN>
 
 [YUTORAH_CLIENT]
 SHIUR_LOOKUP_URL_TEMPLATE = https://www.yutorah.org/search/_get_search_results.cfm?sort_by=shiurdate+desc&page={}&facet_query=teacherid:{}
-
-#proxy rotator API key
-PROXY_ROTATOR_URL = http://falcon.proxyrotator.com:51337/?apiKey={{PROXY_ROTATOR_API_KEY}}&get=true
-YUZMANIM_REQUEST_TIMEOUT = 30
 
 [MONGODB]
 MONGO_CONNECTION_URI = <MONGODB_URI>

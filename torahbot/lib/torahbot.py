@@ -39,7 +39,8 @@ class TorahBot:
             teacher_name=db_record["teacher_name"],
             shiur_date=db_record["shiur_date"],
             shiur_url=db_record["shiur_url"],
-            shiur_title=db_record["shiur_title"]
+            shiur_title=db_record["shiur_title"],
+            shiur_duration = db_record["shiur_duration"]
         )
 
     def send_telegram(self, db_record: dict):
@@ -49,7 +50,8 @@ class TorahBot:
             text=self.message_template_new_shiur.format(
                 teacher=db_record["teacher_name"],
                 title=db_record["shiur_title"],
-                date=dt.strptime(db_record["shiur_date"], "%Y-%m-%dT%H:%M:%SZ").strftime("%B %d, %Y - %I:%M %p")
+                date=dt.strptime(db_record["shiur_date"], "%Y-%m-%dT%H:%M:%SZ").strftime("%B %d, %Y - %I:%M %p"),
+                duration=db_record["shiur_duration"]
             )
         )
 
@@ -72,7 +74,8 @@ class TorahBot:
                 "teacher_name": " ".join(shiur["teacherfullname"].split()).strip(),
                 "shiur_date": shiur["shiurdatesubmitted"],
                 "shiur_url": shiur["shiurdownloadurl"],
-                "shiur_title": shiur["shiurtitle"]
+                "shiur_title": shiur["shiurtitle"],
+                "shiur_duration": shiur["durationformatted"]
             }
             self.logger.info("shiur retriaval: new db record - {}".format(db_record))
             self.send_telegram(db_record)

@@ -23,7 +23,7 @@ class MongoDBHelper:
         collection = self._get_shiur_collection()
         return collection.count_documents({ 'shiur_id': shiur_id }, limit = 1) != 0
 
-    def insert_shiur(self, shiur_id: int, teacher_id: int, teacher_name: str, shiur_date: str, shiur_url: str, shiur_title: str) -> None:
+    def insert_shiur(self, shiur_id: int, teacher_id: int, teacher_name: str, shiur_date: str, shiur_url: str, shiur_title: str, shiur_duration: str) -> None:
         collection = self._get_shiur_collection()
         document = {
             "shiur_id": shiur_id,
@@ -31,7 +31,8 @@ class MongoDBHelper:
             "teacher_name": teacher_name,
             "shiur_date": shiur_date,
             "shiur_url": shiur_url,
-            "shiur_title": shiur_title
+            "shiur_title": shiur_title,
+            "shiur_duration": shiur_duration
         }
         self.logger.info("inserting document into mongodb")
         self.logger.info("{}".format(document))

@@ -7,6 +7,7 @@ MESSAGE_TEMPLATE_NEW_SHIUR = New Shiur!
     Teacher: *{teacher}*
     Title: *{title}*
     Date: *{date}*
+    Duration: *{duration}*
 
 #Teacher IDs for YU Torah.
 #80330 = Rav Schnall
